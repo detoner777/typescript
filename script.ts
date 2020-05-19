@@ -1,56 +1,39 @@
-function a(x: number ,y: number): number {
-	return x + y;
+let a: any = 1;
+let b: number = a;
+//приведение типов
+let c: unknown = 1;
+let d: number = <number>c;
+let e: number = c as number;
+
+let f: any = 'hello';
+let g: number = (<string>f).length;
+
+//объединение типов
+type I = number | string;
+let h: I = 1;
+h = 'Hello';
+
+type J = 1 | 2 | 3;
+let j: J = 1;
+
+type K = 'a' | 'b' | 'c';
+let k: K = 'a';
+
+type JKL = 'a' | 1 | boolean;
+let jkl: JKL = true;
+
+type M = { a: string } | { b: string };
+let m: M = { a: '' };
+let m2: M = { b: '' };
+
+//пeресичение типов
+type N = { a: string } & { b: string };
+let n: N = { a: '', b: '' };
+
+type O = { a: string; b?: string };
+let o: O = { a: '' };
+o = { a: '', b: '' };
+
+if ('b' in o) {
+    console.log('Hello TypeScript');
 }
-
-let b = (x: number, y: number): number => x + y;
-
-// /Сигнатура:
-
-let c: (x: number, y: number) => number;
-
-c = function (x: number, y: number): number {
-	return x + y;
-}
-///void если не будем использовать return
-
-function d(x: number, y: number): void {
-	console.log(x +y)
-}
-/// функция которая никогда не завершиться(бесконечный цикл)
-
-function e (x: string): never {
-	throw new Error(x)
-}
-
-// /Перегрузка функций:
-
-// function f(x: any, y: any): any {
-// 	if (typeof x === 'number') {
-// 		return x + y
-// 	} else {
-// 		return `${x} ${y}`
-// 	}
-// 	}
-
-function g(x: number, y: number):number;
-function g(x: string, y: number):string;
-function g(x: any, y: any): any {
-	if (typeof x === 'number') {
-		return x + y
-	} else {
-		return `${x} ${y}`
-	}
-	}
-
-	console.log(g(1, 2));
-	console.log(g('sds', 2));
-
-	
-		
-
-
-
-
-
-
-

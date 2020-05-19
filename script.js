@@ -1,29 +1,23 @@
 "use strict";
-function a(x, y) {
-    return x + y;
+var a = 1;
+var b = a;
+//приведение типов
+var c = 1;
+var d = c;
+var e = c;
+var f = 'hello';
+var g = f.length;
+var h = 1;
+h = 'Hello';
+var j = 1;
+var k = 'a';
+var jkl = true;
+var m = { a: '' };
+var m2 = { b: '' };
+var n = { a: '', b: '' };
+var o = { a: '' };
+o = { a: '', b: '' };
+if ('b' in o) {
+    console.log('Hello TypeScript');
 }
-var b = function (x, y) { return x + y; };
-// /Сигнатура:
-var c;
-c = function (x, y) {
-    return x + y;
-};
-///void если не будем использовать return
-function d(x, y) {
-    console.log(x + y);
-}
-/// функция которая никогда не завершиться(бесконечный цикл)
-function e(x) {
-    throw new Error(x);
-}
-function g(x, y) {
-    if (typeof x === 'number') {
-        return x + y;
-    }
-    else {
-        return x + " " + y;
-    }
-}
-console.log(g(1, 2));
-console.log(g('sds', 2));
 //# sourceMappingURL=script.js.map
