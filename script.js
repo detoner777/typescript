@@ -1,4 +1,9 @@
 "use strict";
+// interface IPerson {
+//     name?: string;
+//     age: number;
+//     sayHello(): string;
+// }
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -62,5 +67,5 @@ var liza = new Student('Лиза', 20, 'A2', 2);
 console.log(liza);
 var igor = new Teacher('Igor', 23, ['TypeScript', 'React Native']);
 console.log(igor);
-// https://www.youtube.com/watch?v=0RUAMYdz9l0
+// https://www.youtube.com/watch?v=jLyUeK72d70
 //# sourceMappingURL=script.js.map

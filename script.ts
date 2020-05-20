@@ -1,4 +1,25 @@
-class Person {
+// interface IPerson {
+//     name?: string;
+//     age: number;
+//     sayHello(): string;
+// }
+
+// type IPerson = {
+//     name: string;
+//     age: number;
+//     sayHello(): string;
+// };
+
+interface IPersonProps {
+    name?: string;
+    age: number;
+}
+
+interface IPerson extends IPersonProps {
+    sayHello(): string;
+}
+
+class Person implements IPerson {
     name: string = '';
     age: number = 0;
 
@@ -53,4 +74,4 @@ console.log(liza);
 const igor: Teacher = new Teacher('Igor', 23, ['TypeScript', 'React Native']);
 console.log(igor);
 
-// https://www.youtube.com/watch?v=0RUAMYdz9l0
+// https://www.youtube.com/watch?v=jLyUeK72d70
