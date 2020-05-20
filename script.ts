@@ -1,57 +1,56 @@
 class Person {
-    _name: string = 'Alex';
-    _age: number = 23;
-
-    get name(): string {
-        return this._name;
-    }
-
-    set name(value: string) {
-        this._name = value;
-    }
-
-    get age(): number {
-        return this._age;
-    }
-
-    set age(value: number) {
-        if (value > 0 && value < 100) {
-            this._age = value;
-        } else {
-            throw new Error('Неверный возраст');
-        }
-    }
+    name: string = '';
+    age: number = 0;
 
     constructor(name: string, age: number) {
-        this._name = name;
-        this._age = age;
+        this.name = name;
+        this.age = age;
     }
-    sayHelo(): string {
-        return `Привет, меня зовут ${this._name}`;
-    }
-    static isFlying = false;
 
-    static description(): string {
-        return 'Класс "Человек"';
+    sayHello(): string {
+        return `Привет, меня зовут ${this.name}`;
     }
 }
 
-const alex: Person = new Person('Игорь', 23);
-const dima: Person = new Person('Дима', 18);
+class Student extends Person {
+    group: string = '';
+    course: number = 0;
 
-console.log(alex);
-console.log(alex.sayHelo());
-console.log(alex.name);
-alex.age = 50;
-console.log(alex.age);
-
-console.log(Person.isFlying);
-
-console.log(dima);
-console.log(dima.sayHelo());
-
-if (alex instanceof Person) {
-    console.log('Alex is Person');
+    constructor(name: string, age: number, group: string, course: number) {
+        super(name, age);
+        this.group = group;
+        this.course = course;
+    }
+    sayHello(): string {
+        // return `привет я ${this.name} из группы ${this.group}`;
+        const text = super.sayHello();
+        return `${text} Я и группы ${this.group}`;
+    }
 }
 
-// https://www.youtube.com/watch?v=lVU6BY3cty4
+class Teacher extends Person {
+    disciplines: string[] = [];
+
+    constructor(name: string, age: number, disciplines: string[]) {
+        super(name, age);
+        this.disciplines = disciplines;
+    }
+}
+
+const ira: Person = new Person('Ира', 18);
+console.log(ira);
+
+const denis: Student = new Student('Денис', 25, 'A1', 1);
+console.log(denis);
+
+// приведение типов
+const newDenis: Person = <Person>denis;
+console.log(newDenis);
+
+const liza: Person = new Student('Лиза', 20, 'A2', 2);
+console.log(liza);
+
+const igor: Teacher = new Teacher('Igor', 23, ['TypeScript', 'React Native']);
+console.log(igor);
+
+// https://www.youtube.com/watch?v=0RUAMYdz9l0
