@@ -1,39 +1,30 @@
-let a: any = 1;
-let b: number = a;
-//приведение типов
-let c: unknown = 1;
-let d: number = <number>c;
-let e: number = c as number;
+//масивы
+let a: number[] = [1, 2, 3];
 
-let f: any = 'hello';
-let g: number = (<string>f).length;
+let b: Array<number> = [1, 2, 3];
 
-//объединение типов
-type I = number | string;
-let h: I = 1;
-h = 'Hello';
+let c: (number | string)[] = [1, 2, ''];
 
-type J = 1 | 2 | 3;
-let j: J = 1;
+let d: Array<number | string> = [1, 2, ''];
 
-type K = 'a' | 'b' | 'c';
-let k: K = 'a';
+//кортежи
+let e: [number, string] = [1, ''];
 
-type JKL = 'a' | 1 | boolean;
-let jkl: JKL = true;
+let f: [number, string?] = [1, ''];
+f = [1];
 
-type M = { a: string } | { b: string };
-let m: M = { a: '' };
-let m2: M = { b: '' };
-
-//пeресичение типов
-type N = { a: string } & { b: string };
-let n: N = { a: '', b: '' };
-
-type O = { a: string; b?: string };
-let o: O = { a: '' };
-o = { a: '', b: '' };
-
-if ('b' in o) {
-    console.log('Hello TypeScript');
+//перечисление
+enum G {
+    A = 'Hello',
+    B = 'TypeScrypt',
 }
+
+console.log(G.A, G.B);
+
+const enum H {
+    A,
+    B,
+}
+console.log(H.A, G.B);
+
+//https://www.youtube.com/watch?v=xhncw1nRPUc
