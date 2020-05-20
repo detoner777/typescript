@@ -1,30 +1,57 @@
-//масивы
-let a: number[] = [1, 2, 3];
+class Person {
+    _name: string = 'Alex';
+    _age: number = 23;
 
-let b: Array<number> = [1, 2, 3];
+    get name(): string {
+        return this._name;
+    }
 
-let c: (number | string)[] = [1, 2, ''];
+    set name(value: string) {
+        this._name = value;
+    }
 
-let d: Array<number | string> = [1, 2, ''];
+    get age(): number {
+        return this._age;
+    }
 
-//кортежи
-let e: [number, string] = [1, ''];
+    set age(value: number) {
+        if (value > 0 && value < 100) {
+            this._age = value;
+        } else {
+            throw new Error('Неверный возраст');
+        }
+    }
 
-let f: [number, string?] = [1, ''];
-f = [1];
+    constructor(name: string, age: number) {
+        this._name = name;
+        this._age = age;
+    }
+    sayHelo(): string {
+        return `Привет, меня зовут ${this._name}`;
+    }
+    static isFlying = false;
 
-//перечисление
-enum G {
-    A = 'Hello',
-    B = 'TypeScrypt',
+    static description(): string {
+        return 'Класс "Человек"';
+    }
 }
 
-console.log(G.A, G.B);
+const alex: Person = new Person('Игорь', 23);
+const dima: Person = new Person('Дима', 18);
 
-const enum H {
-    A,
-    B,
+console.log(alex);
+console.log(alex.sayHelo());
+console.log(alex.name);
+alex.age = 50;
+console.log(alex.age);
+
+console.log(Person.isFlying);
+
+console.log(dima);
+console.log(dima.sayHelo());
+
+if (alex instanceof Person) {
+    console.log('Alex is Person');
 }
-console.log(H.A, G.B);
 
-//https://www.youtube.com/watch?v=xhncw1nRPUc
+// https://www.youtube.com/watch?v=lVU6BY3cty4
