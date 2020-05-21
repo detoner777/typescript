@@ -19,7 +19,7 @@ interface IPerson extends IPersonProps {
     sayHello(): string;
 }
 
-class Person implements IPerson {
+abstract class Person implements IPerson {
     name: string = '';
     age: number = 0;
 
@@ -31,6 +31,8 @@ class Person implements IPerson {
     sayHello(): string {
         return `Привет, меня зовут ${this.name}`;
     }
+
+    abstract description(): string;
 }
 
 class Student extends Person {
@@ -47,6 +49,14 @@ class Student extends Person {
         const text = super.sayHello();
         return `${text} Я и группы ${this.group}`;
     }
+    description(): string {
+        return `
+            Имя: ${this.name}
+            Возвраст: ${this.age}
+            Группа: ${this.group}
+            Курс: ${this.course}
+        `;
+    }
 }
 
 class Teacher extends Person {
@@ -56,10 +66,17 @@ class Teacher extends Person {
         super(name, age);
         this.disciplines = disciplines;
     }
+    description(): string {
+        return `
+            Имя: ${this.name}
+            Возвраст: ${this.age}
+            Дисциплины: ${this.disciplines}
+            `;
+    }
 }
 
-const ira: Person = new Person('Ира', 18);
-console.log(ira);
+// const ira: Person = new Person('Ира', 18);
+// console.log(ira);
 
 const denis: Student = new Student('Денис', 25, 'A1', 1);
 console.log(denis);
@@ -74,4 +91,4 @@ console.log(liza);
 const igor: Teacher = new Teacher('Igor', 23, ['TypeScript', 'React Native']);
 console.log(igor);
 
-// https://www.youtube.com/watch?v=jLyUeK72d70
+// https://www.youtube.com/watch?v=0zmMHXoUzRo

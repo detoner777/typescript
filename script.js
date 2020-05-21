@@ -44,6 +44,9 @@ var Student = /** @class */ (function (_super) {
         var text = _super.prototype.sayHello.call(this);
         return text + " \u042F \u0438 \u0433\u0440\u0443\u043F\u043F\u044B " + this.group;
     };
+    Student.prototype.description = function () {
+        return "\n            \u0418\u043C\u044F: " + this.name + "\n            \u0412\u043E\u0437\u0432\u0440\u0430\u0441\u0442: " + this.age + "\n            \u0413\u0440\u0443\u043F\u043F\u0430: " + this.group + "\n            \u041A\u0443\u0440\u0441: " + this.course + "\n        ";
+    };
     return Student;
 }(Person));
 var Teacher = /** @class */ (function (_super) {
@@ -54,10 +57,13 @@ var Teacher = /** @class */ (function (_super) {
         _this.disciplines = disciplines;
         return _this;
     }
+    Teacher.prototype.description = function () {
+        return "\n            \u0418\u043C\u044F: " + this.name + "\n            \u0412\u043E\u0437\u0432\u0440\u0430\u0441\u0442: " + this.age + "\n            \u0414\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D\u044B: " + this.disciplines + "\n            ";
+    };
     return Teacher;
 }(Person));
-var ira = new Person('Ира', 18);
-console.log(ira);
+// const ira: Person = new Person('Ира', 18);
+// console.log(ira);
 var denis = new Student('Денис', 25, 'A1', 1);
 console.log(denis);
 // приведение типов
@@ -67,5 +73,5 @@ var liza = new Student('Лиза', 20, 'A2', 2);
 console.log(liza);
 var igor = new Teacher('Igor', 23, ['TypeScript', 'React Native']);
 console.log(igor);
-// https://www.youtube.com/watch?v=jLyUeK72d70
+// https://www.youtube.com/watch?v=0zmMHXoUzRo
 //# sourceMappingURL=script.js.map
