@@ -1,32 +1,16 @@
-// interface IPerson {
-//     name?: string;
-//     age: number;
-//     sayHello(): string;
-// }
-
-// type IPerson = {
-//     name: string;
-//     age: number;
-//     sayHello(): string;
-// };
-
-interface IPersonProps {
-    name?: string;
-    age: number;
-}
-
-interface IPerson extends IPersonProps {
-    sayHello(): string;
-}
-
-abstract class Person implements IPerson {
-    name: string = '';
-    age: number = 0;
+abstract class Person {
+    public name: string = '';
+    // private name: string = '';
+    // protected name: string = '';
+    // age: number = 0;
+    public readonly age: number = 0;
 
     constructor(name: string, age: number) {
         this.name = name;
         this.age = age;
     }
+
+    // constructor(public name: string, public age: number) {}
 
     sayHello(): string {
         return `Привет, меня зовут ${this.name}`;
@@ -80,6 +64,7 @@ class Teacher extends Person {
 
 const denis: Student = new Student('Денис', 25, 'A1', 1);
 console.log(denis);
+console.log(denis.name);
 
 // приведение типов
 const newDenis: Person = <Person>denis;
@@ -91,4 +76,4 @@ console.log(liza);
 const igor: Teacher = new Teacher('Igor', 23, ['TypeScript', 'React Native']);
 console.log(igor);
 
-// https://www.youtube.com/watch?v=0zmMHXoUzRo
+// https://www.youtube.com/watch?v=X492_WJgQhI
