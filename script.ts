@@ -1,68 +1,119 @@
-namespace Utils {
-    export function log(text: string, color: string): void;
-    export function log(text: string, color: string, fontSize: number): void;
+// type A<T> = T;
+// type B = A<string>;
+// type C = A<'hello'>;
+// type D = A<number>;
 
-    export function log(text: string, color: string, fontSize?: number) {
-        if (fontSize) {
-            console.log(`%c${text}`, `color: ${color}; font-size: ${fontSize}px`);
-        } else {
-            console.log(`%c${text}`, `color: ${color}`);
-        }
-    }
+type MyArray<T> = T[];
+// const arr: MyArray<string> = ['Hello', 'TypeScript'];
 
-    log('Text inside', '#d9534f', 40);
+//Обобщение Функций
+// function echo<T>(x: T): T {
+//     return x;
+// }
+
+// const echo = <T>(x: T): T => x;
+
+const echo: <T>(x: T) => T = <T>(x: T): T => {
+    return x;
+};
+
+// const result: string = echo('Hello TypeScript');
+
+// const result = echo<string>('Hello!');
+
+//Обобщение Классов
+// class List<T> {
+//     elements: T[] = [];
+
+//     add(element: T) {
+//         this.elements.push(element);
+//     }
+// }
+
+// const list = new List<string>();
+// list.add('Hello');
+// list.add('TS');
+
+//Обобщение интерфейсов
+interface IList<T> {
+    elements: T[];
+    add(element: T): void;
 }
 
-Utils.log('Text outside', '#d9534f');
-
-namespace Animals {
-    export abstract class Animal {
-        protected name: string;
-
-        constructor(name: string) {
-            this.name = name;
-        }
-        abstract say(): void;
-    }
-    export namespace Pets {
-        export class Cat extends Animal {
-            say() {
-                Utils.log(`${this.name}: myauu`, `#96ceb4`, 20);
-            }
-        }
-        export class Dog extends Animal {
-            say() {
-                Utils.log(`${this.name}: gav`, `#ffceb4`, 30);
-            }
-        }
-    }
-}
-
-namespace Animals {
-    export class Tiger extends Animals.Animal {
-        private text: string;
-        #text: string;
-
-        constructor(name: string, text: string) {
-            super(name);
-            this.text = text;
-            this.#text = text;
-        }
-        say() {
-            Utils.log(`${this.name}: ${this.text} ${this.#text}`, '#ffad60', 60);
-        }
+class List implements IList<string> {
+    elements: string[] = [];
+    add(element: string): void {
+        this.elements.push(element);
     }
 }
 
-const tiger = new Animals.Tiger('Tigr', 'rrr');
-// console.log(tiger.text);
-// console.log(tiger.#text);
-tiger.say();
+const list = new List();
+list.add('Hello');
+list.add('TS');
 
-const cat = new Animals.Pets.Cat('Barsik');
-cat.say();
+// type A<T extends string> = T;
+// type A<T> = T extends string ? string : never;
+// type B = A<string>;
+// type C = A<'hello'>;
+// type D = A<number>;
 
-const dog = new Animals.Pets.Dog('Sharik');
-dog.say();
+interface IName {
+    name: string;
+}
 
-// https://www.youtube.com/watch?v=jKN-VqWQdlY
+function printName<T extends IName>(person: T) {
+    console.log(person.name);
+}
+
+printName({ name: 'Igor', age: 23 });
+
+// interface A {
+//     a: string;
+//     b: number;
+//     c: boolean;
+// }
+// type B = keyof A;
+
+function getProperty<ObjectType, KeyType extends keyof ObjectType>(object: ObjectType, key: KeyType) {
+    return object[key];
+}
+
+// const result = getProperty({ name: 'Igor', age: 23 }, 'name');
+
+// const arr = [1, 'Hello', false];
+// type A<T> = T extends (infer U)[] ? U : never;
+// type B = typeof arr;
+// type C = A<B>;
+
+const person = { name: 'Igor', age: 23 };
+type A<T> = T extends {
+    [key: string]: infer U;
+}
+    ? U
+    : never;
+type B = typeof person;
+type C = A<B>;
+
+class Cat {
+    say(): string {
+        return 'meou';
+    }
+}
+
+class Dog {
+    say(): string {
+        return 'woof';
+    }
+}
+
+interface IClass<T> {
+    new (): T;
+}
+
+function createObject<T>(c: IClass<T>): T {
+    return new c();
+}
+
+const pet = createObject(Cat);
+
+// https://www.youtube.com/watch?v=Q5YPUIFqijQ
