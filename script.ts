@@ -1,119 +1,26 @@
-// type A<T> = T;
-// type B = A<string>;
-// type C = A<'hello'>;
-// type D = A<number>;
+//Parcial
+type Person1 = { name: string; age: number };
+type Person2 = Partial<Person1>;
+type MyParcial<T> = { [P in keyof T]?: T[P] };
+type Person3 = MyParcial<Person1>;
 
-type MyArray<T> = T[];
-// const arr: MyArray<string> = ['Hello', 'TypeScript'];
+//Required
+type Animal1 = { name: string; weight?: number };
+type Animal2 = Required<Animal1>;
+type MyRequired<T> = { [P in keyof T]-?: T[P] };
+type Animal3 = MyRequired<Animal1>;
 
-//Обобщение Функций
-// function echo<T>(x: T): T {
-//     return x;
-// }
+//NonNullable
+type Color1 = string | undefined | null;
+type Color2 = NonNullable<Color1>;
+type MyNonNullable<T> = T extends null | undefined ? never : T;
+type Color3 = MyNonNullable<Color1>;
 
-// const echo = <T>(x: T): T => x;
+//Record
+type Dimensions1 = { width: number; height: number; length: number };
+type Dimensions2 = Record<'width' | 'height' | 'length', number>;
+type MyRecord<K extends keyof any, T> = { [P in K]: T };
+type Dimensions3 = MyRecord<'width' | 'height' | 'length', number>;
 
-const echo: <T>(x: T) => T = <T>(x: T): T => {
-    return x;
-};
 
-// const result: string = echo('Hello TypeScript');
-
-// const result = echo<string>('Hello!');
-
-//Обобщение Классов
-// class List<T> {
-//     elements: T[] = [];
-
-//     add(element: T) {
-//         this.elements.push(element);
-//     }
-// }
-
-// const list = new List<string>();
-// list.add('Hello');
-// list.add('TS');
-
-//Обобщение интерфейсов
-interface IList<T> {
-    elements: T[];
-    add(element: T): void;
-}
-
-class List implements IList<string> {
-    elements: string[] = [];
-    add(element: string): void {
-        this.elements.push(element);
-    }
-}
-
-const list = new List();
-list.add('Hello');
-list.add('TS');
-
-// type A<T extends string> = T;
-// type A<T> = T extends string ? string : never;
-// type B = A<string>;
-// type C = A<'hello'>;
-// type D = A<number>;
-
-interface IName {
-    name: string;
-}
-
-function printName<T extends IName>(person: T) {
-    console.log(person.name);
-}
-
-printName({ name: 'Igor', age: 23 });
-
-// interface A {
-//     a: string;
-//     b: number;
-//     c: boolean;
-// }
-// type B = keyof A;
-
-function getProperty<ObjectType, KeyType extends keyof ObjectType>(object: ObjectType, key: KeyType) {
-    return object[key];
-}
-
-// const result = getProperty({ name: 'Igor', age: 23 }, 'name');
-
-// const arr = [1, 'Hello', false];
-// type A<T> = T extends (infer U)[] ? U : never;
-// type B = typeof arr;
-// type C = A<B>;
-
-const person = { name: 'Igor', age: 23 };
-type A<T> = T extends {
-    [key: string]: infer U;
-}
-    ? U
-    : never;
-type B = typeof person;
-type C = A<B>;
-
-class Cat {
-    say(): string {
-        return 'meou';
-    }
-}
-
-class Dog {
-    say(): string {
-        return 'woof';
-    }
-}
-
-interface IClass<T> {
-    new (): T;
-}
-
-function createObject<T>(c: IClass<T>): T {
-    return new c();
-}
-
-const pet = createObject(Cat);
-
-// https://www.youtube.com/watch?v=Q5YPUIFqijQ
+// https://www.youtube.com/watch?v=BTB3VDkWiOQ
