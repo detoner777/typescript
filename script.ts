@@ -22,5 +22,39 @@ type Dimensions2 = Record<'width' | 'height' | 'length', number>;
 type MyRecord<K extends keyof any, T> = { [P in K]: T };
 type Dimensions3 = MyRecord<'width' | 'height' | 'length', number>;
 
+// Readonly
+type Article1 = { title: string; page: number };
+type Article2 = Readonly<Article1>;
+type Article3 = MyReadonly<Article1>;
+type MyReadonly<T> = { readonly [P in keyof T]: T[P] };
+
+const article1: Article3 = { title: 'Article2', page: 2 };
+// article1.title = 'Rrr';
+
+//ReadonlyArray
+type Articles1 = Array<Article3>;
+type Articles2 = ReadonlyArray<Article3>;
+
+const articles1: Articles1 = [
+    { title: 'Article1', page: 1 },
+    { title: 'Article2', page: 2 },
+    { title: 'Article3', page: 3 },
+];
+articles1.push({ title: 'Article4', page: 4 });
+
+const articles2: Articles2 = [
+    { title: 'Article1', page: 1 },
+    { title: 'Article2', page: 2 },
+    { title: 'Article3', page: 3 },
+];
+// articles2.push({ title: 'Article4', page: 4 });
+const articles3 = [
+    { title: 'Article1', page: 1 },
+    { title: 'Article2', page: 2 },
+    { title: 'Article3', page: 3 },
+] as const;
+
+function f1(arr: ReadonlyArray<string>) {}
+function f2(arr: readonly string[]) {}
 
 // https://www.youtube.com/watch?v=BTB3VDkWiOQ
