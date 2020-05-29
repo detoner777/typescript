@@ -57,4 +57,5 @@ const articles3 = [
 function f1(arr: ReadonlyArray<string>) {}
 function f2(arr: readonly string[]) {}
 
+
 // https://www.youtube.com/watch?v=BTB3VDkWiOQ
